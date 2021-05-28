@@ -1,0 +1,25 @@
+import 'package:get/get.dart';
+class ScheduleController extends GetxController {
+
+  RxInt currentIndex = RxInt(0);
+
+  void selectedIndex(int index){
+    currentIndex.value = index;
+    update();
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() async {
+    super.onClose();
+  }
+}
