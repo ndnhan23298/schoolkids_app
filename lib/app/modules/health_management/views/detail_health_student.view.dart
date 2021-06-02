@@ -1,11 +1,15 @@
+import 'package:doan/app/modules/navigation/views/navigation.view.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:doan/app/modules/health_management/widgets/add_detail_health_student.dart';
 import 'package:doan/app/modules/health_management/widgets/body_detail_health_student.dart';
 import 'package:doan/app/theme/color_theme.dart';
+import 'package:get_storage/get_storage.dart';
 
 class DetailHealthStudentView extends StatelessWidget {
+  final _store = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +48,7 @@ class DetailHealthStudentView extends StatelessWidget {
             ],
           )),
       body: BodyDetailHealthStudent(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: _store.read(AppStorageKey.studentId) == null  ? FloatingActionButton(
         backgroundColor: kPrimaryColor,
         child: Icon(
           Icons.add,
@@ -56,7 +60,8 @@ class DetailHealthStudentView extends StatelessWidget {
             AddDetailHealth(),
           );
         },
-      ),
+      ) : SizedBox(),
+      bottomNavigationBar: NavigationView(),
     );
   }
 }

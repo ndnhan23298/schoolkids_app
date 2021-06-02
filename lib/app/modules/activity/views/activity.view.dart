@@ -2,11 +2,14 @@ import 'package:doan/app/modules/activity/controllers/activity.controller.dart';
 import 'package:doan/app/modules/activity/views/extracurricular_activity.view.dart';
 import 'package:doan/app/modules/navigation/views/navigation.view.dart';
 import 'package:doan/app/theme/color_theme.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ActivityView extends StatelessWidget {
+  final _store = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +29,177 @@ class ActivityView extends StatelessWidget {
       body: GetBuilder<ActivityController>(
           init: Get.find(),
           builder: (controller) {
-            return Padding(
+            return _store.read(AppStorageKey.studentId) != null ?
+            DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar:  TabBar(
+                      tabs: [
+                        Tab(
+                          child: Text('Hoạt động', style: TextStyle(
+                            color: Colors.pink
+                          ),),
+                        ),
+                        Tab(
+                          child: Text('Đã đăng ký', style: TextStyle(
+                              color: Colors.pink
+                          ),),
+                        ),
+                      ],
+                  ),
+                  body: TabBarView(
+                    children: [
+                      Center(child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: controller.isLoadding.value
+                            ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                            : ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: controller.activitiess.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = controller.activitiess[index];
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              width: double.infinity,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    spreadRadius: 1,
+                                  ), //BoxSh
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item.name,
+                                            style: TextStyle(
+                                                color: Colors.pink,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            item.address,
+                                            style: TextStyle(color: Colors.pink),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.onJoin(
+                                            controller.activitiess[index].id);
+                                      },
+                                      child: Container(
+                                        width: 110,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(50),
+                                            // border: Border.all(color: Colors.black, width: 1)
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey,
+                                                  blurRadius: 1,
+                                                  spreadRadius: 1)
+                                            ]),
+                                        child: FlatButton(
+                                          child: Text(
+                                            'Tham Gia',
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )),
+                      Center(child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: controller.isLoadding.value
+                            ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                            : ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: controller.joinedActivitiess.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = controller.joinedActivitiess[index];
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              width: double.infinity,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    spreadRadius: 1,
+                                  ), //BoxSh
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item.name,
+                                            style: TextStyle(
+                                                color: Colors.pink,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            item.address,
+                                            style: TextStyle(color: Colors.pink),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )),
+                    ],
+                  ),
+                )
+            ) :
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView.builder(
+              child: controller.isLoadding.value
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: 10,
+                itemCount: controller.activitiess.length,
                 itemBuilder: (BuildContext context, int index) {
+                  final item = controller.activitiess[index];
                   return Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
                     width: double.infinity,
@@ -53,37 +221,20 @@ class ActivityView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "ABCDEFGH",
-                                  style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),
+                                  item.name,
+                                  style: TextStyle(
+                                      color: Colors.pink,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "144, Nguyen Luong bang, Hoa Khanh Bac, Lien Chieu, Da Nang",
+                                  item.address,
                                   style: TextStyle(color: Colors.pink),
                                 )
                               ],
-                            ),
-                          ),
-                          Container(
-                            width: 110,
-                            height: 35,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(50),
-                                // border: Border.all(color: Colors.black, width: 1)
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 1,
-                                      spreadRadius: 1)
-                                ]),
-                            child: FlatButton(
-                              child: Text(
-                                'Tham Gia',
-                                style: TextStyle(fontSize: 18),
-                              ),
                             ),
                           ),
                         ],
@@ -94,7 +245,7 @@ class ActivityView extends StatelessWidget {
               ),
             );
           }),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:  _store.read(AppStorageKey.studentId) == null ? FloatingActionButton(
         backgroundColor: kPrimaryColor,
         child: Icon(
           Icons.add,
@@ -106,7 +257,7 @@ class ActivityView extends StatelessWidget {
             ExtracurricularActivityView(),
           );
         },
-      ),
+      ) : SizedBox(),
       bottomNavigationBar: NavigationView(),
     );
   }

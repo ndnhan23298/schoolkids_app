@@ -38,7 +38,7 @@ class UserProvider extends GetConnect {
        return false;
      }
     }catch(e){
-      throw e;
+      return false;
     }
   }
 

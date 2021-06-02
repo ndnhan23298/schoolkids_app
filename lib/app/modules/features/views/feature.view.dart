@@ -1,11 +1,15 @@
 import 'package:doan/app/modules/navigation/views/navigation.view.dart';
 import 'package:doan/app/routes/app_pages.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:doan/app/theme/color_theme.dart';
+import 'package:get_storage/get_storage.dart';
 
 class FeaturesView extends StatelessWidget {
+
+  final _store = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +49,7 @@ class FeaturesView extends StatelessWidget {
                       SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "Activity",
+                          "Hoạt động ngoại khoá",
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                       ),
@@ -53,64 +57,39 @@ class FeaturesView extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(
-                    top: kDefaultPadding * 2,
-                    left: kDefaultPadding * 2,
-                    right: kDefaultPadding * 2),
-                width: Get.width,
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          color: kPrimaryColor.withOpacity(0.3),
-                          blurRadius: 7),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(width: 70, height: 70,child: Image.asset('assets/images/album.png'),),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        "Album",
-                        style: TextStyle(color: kPrimaryColor, fontSize: 18),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.SCHEDULE);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.only(
+                      top: kDefaultPadding * 2,
+                      left: kDefaultPadding * 2,
+                      right: kDefaultPadding * 2),
+                  width: Get.width,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 0),
+                            color: kPrimaryColor.withOpacity(0.3),
+                            blurRadius: 7),
+                      ]),
+                  child: Row(
+                    children: [
+                      Container(width: 70, height: 70,child: Image.asset('assets/images/calendar.png'),),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          "Báo nghỉ",
+                          style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(
-                    top: kDefaultPadding * 2,
-                    left: kDefaultPadding * 2,
-                    right: kDefaultPadding * 2),
-                width: Get.width,
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          color: kPrimaryColor.withOpacity(0.3),
-                          blurRadius: 7),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(width: 70, height: 70,child: Image.asset('assets/images/calendar.png'),),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        "Báo nghỉ",
-                        style: TextStyle(color: kPrimaryColor, fontSize: 18),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
@@ -140,7 +119,7 @@ class FeaturesView extends StatelessWidget {
                       SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "Fee",
+                          "Học phí",
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                       ),
@@ -175,7 +154,7 @@ class FeaturesView extends StatelessWidget {
                       SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "Message",
+                          "Tin nhắn",
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                       ),
@@ -185,7 +164,11 @@ class FeaturesView extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(Routes.HEALTH_MANAGEMENT);
+                  if(_store.read(AppStorageKey.studentId) != null){
+                    Get.toNamed(Routes.DETAIL_HEALTH_STUDENT);
+                  }else{
+                    Get.toNamed(Routes.HEALTH_MANAGEMENT);
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -210,7 +193,7 @@ class FeaturesView extends StatelessWidget {
                       SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "Health",
+                          "Thông tin sức khoẻ",
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                       ),

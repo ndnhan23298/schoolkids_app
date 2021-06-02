@@ -11,6 +11,7 @@ import 'package:doan/app/modules/home/views/album_detail.dart';
 import 'package:doan/app/modules/home/views/home.view.dart';
 import 'package:doan/app/modules/schedule/binding/schedule.binding.dart';
 import 'package:doan/app/modules/schedule/view/schedule.view.dart';
+import 'package:doan/app/modules/tuition/bindings/tuition.binding.dart';
 import 'package:doan/app/modules/tuition/views/tuition.view.dart';
 import 'package:doan/app/modules/user_access/bindings/user_access.binding.dart';
 import 'package:doan/app/modules/user_access/views/user_access.view.dart';
@@ -28,7 +29,7 @@ import 'package:doan/app/modules/profile/views/profile.view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -91,7 +92,7 @@ class AppPages {
     GetPage(
       name: Routes.DETAIL_HEALTH_STUDENT,
       page: () => DetailHealthStudentView(),
-      binding: DetailHeathStudentBinding(),
+      binding: HeathManagementBinding(),
     ),
     GetPage(
       name: Routes.EXTRACURRICULAR_ACTIVITY,
@@ -107,6 +108,7 @@ class AppPages {
     GetPage(
       name: Routes.TUITION,
       page: () => TuitionView(),
+      binding: TuitionBinding(),
     ),
 
     GetPage(

@@ -1,12 +1,16 @@
 import 'package:doan/app/modules/auth/controllers/auth.controller.dart';
 import 'package:doan/app/routes/app_pages.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:doan/app/theme/color_theme.dart';
+import 'package:get_storage/get_storage.dart';
 
 class Body extends StatelessWidget {
-  const Body({
+  final _store = GetStorage();
+
+  Body({
     Key key,
   }) : super(key: key);
 
@@ -124,33 +128,40 @@ class Body extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
-                width: Get.width,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3,
-                          color: kPrimaryColor),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: Get.height,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(child: Text("Đổi mật khẩu", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18
-                    ),))
-                  ],
+              GestureDetector(
+                onTap:  () async {
+                  Get.toNamed(Routes.USER_ACCESS);
+                  await _store.remove(AppStorageKey.classId);
+                  await _store.remove(AppStorageKey.studentId);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
+                  padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
+                  width: Get.width,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 0),
+                            blurRadius: 3,
+                            color: kPrimaryColor),
+                      ]),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: Get.height,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(width: 15),
+                      Expanded(child: Text("Đổi tài khoản", style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18
+                      ),))
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(

@@ -16,18 +16,54 @@ class ActivityProvider extends GetConnect {
     }
   }
 
+  Future<bool> createParticipant(ParticipantParamModel participantParam) async {
+    try {
+      final response = await HttpHelper.post(Endpoint.PARTICIPANT, participantParam);
+      if (response != null) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<List<ActivityModel>> getActivities() async {
     try {
       final response = await HttpHelper.get(Endpoint.ACTIVITY);
       if (response != null) {
-        final result = response.body.map((_){
-          ActivityModel.fromJson(_);
+        final listActitities = response.body.map<ActivityModel>((_){
+          return ActivityModel.fromJson(_);
         }).toList();
-        return result;
+        return listActitities;
       }
       return [];
     } catch (e) {
       return [];
     }
   }
+
+  Future<dynamic> getJoinedActivities(String studentID) async {
+    try {
+      final response = await HttpHelper.get("${Endpoint.ACTIVITY}?studentID=${studentID}");
+      if (response != null) {
+        final listActitities = response.body['activities'].map<ActivityModel>((_){
+          return ActivityModel.fromJson(_);
+        }).toList();
+
+        final listJoinedActitities = response.body['joinedActivities'].map<ActivityModel>((_){
+          return ActivityModel.fromJson(_);
+        }).toList();
+
+        return {
+          'listActitities': listActitities,
+          'listJoinedActitities': listJoinedActitities
+        };
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
+
 }

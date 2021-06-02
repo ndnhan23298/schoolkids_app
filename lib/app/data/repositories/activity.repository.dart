@@ -12,7 +12,15 @@ class ActivityRepository {
    return apiClient.getActivities();
   }
 
+  Future<dynamic> getJoinedActivities(String studentID) async {
+    return apiClient.getJoinedActivities(studentID);
+  }
+
   Future<bool> createActivities (ActivityParamModel activityParam) async {
     return apiClient.createActivities(activityParam);
+  }
+
+  Future<bool> createParticipants (ParticipantParamModel participantParam) async {
+    return apiClient.createParticipant(participantParam);
   }
 }

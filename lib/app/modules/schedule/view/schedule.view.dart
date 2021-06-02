@@ -157,47 +157,6 @@ class ScheduleView extends StatelessWidget {
           ),
         ),
       ),
-      // bottomNavigationBar:GetBuilder<ProfileController>(
-      //   init: Get.find(),
-      //   builder: (controller){
-      //     return BottomNavigationBar(
-      //       type: BottomNavigationBarType.fixed,
-      //       currentIndex: controller.currentIndex.value,
-      //       backgroundColor: Colors.white,
-      //       selectedItemColor: kPrimaryColor,
-      //       unselectedItemColor: kPrimaryColor.withOpacity(0.4),
-      //       unselectedLabelStyle: TextStyle(color: Colors.red),
-      //       selectedIconTheme: IconThemeData(color: kPrimaryColor),
-      //
-      //       onTap: (value){
-      //         controller.selectedIndex(value);
-      //         if(value == 0){
-      //           Get.toNamed(Routes.CHAT);
-      //         }
-      //         if(value == 1){
-      //           Get.toNamed(Routes.EXTRACURRICULAR_ACTIVITY);
-      //         }
-      //         if(value == 2){
-      //           Get.toNamed(Routes.HEALTH_MANAGEMENT);
-      //         }
-      //       },
-      //       items: [
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.message),
-      //           label: "Chats",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.people),
-      //           label: "People",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.call),
-      //           label: "Calls",
-      //         ),
-      //       ],
-      //     );
-      //   },
-      // )
     );
   }
 }

@@ -3,9 +3,14 @@ import 'dart:io';
 import 'package:doan/app/data/models/chat.model.dart';
 import 'package:doan/app/data/models/user.model.dart';
 import 'package:doan/app/data/repositories/chat.repository.dart';
+import 'package:doan/app/services/socket.service.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 class ChatController extends GetxController {
   final ChatRepository repository;
 
@@ -21,10 +26,24 @@ class ChatController extends GetxController {
 
   File _image;
   final picker = ImagePicker();
+  final store = GetStorage();
+
+  IO.Socket socket;
 
   @override
   void onInit() async {
     _getListUser();
+    String token = store.read(AppStorageKey.ACCESS_TOKEN);
+    if ( SocketService.socket != null) {
+      socket = SocketService.socket;
+    } else {
+      socket = new SocketService(token).getSocketClient();
+    }
+
+    socket.on('message', (data){
+      messages.insert(0,MessageModel.fromJson(data));
+      update();
+    });
     super.onInit();
   }
 
@@ -59,6 +78,7 @@ class ChatController extends GetxController {
 
 
   Future<void> getListMessage(UserModel user) async {
+    messages.clear();
     try {
       isLoading.value = true;
       update();

@@ -33,3 +33,20 @@ Map<String, dynamic> _$ActivityParamModelToJson(ActivityParamModel instance) =>
       'name': instance.name,
       'address': instance.address,
     };
+
+ParticipantParamModel _$ParticipantParamModelFromJson(
+    Map<String, dynamic> json) {
+  return ParticipantParamModel(
+    activityID: json['activityID'] as String,
+    studentID: json['studentID'] as String,
+    classID: json['classID'] as String,
+  );
+}
+
+Map<String, dynamic> _$ParticipantParamModelToJson(
+        ParticipantParamModel instance) =>
+    <String, dynamic>{
+      'activityID': instance.activityID,
+      'studentID': instance.studentID,
+      'classID': instance.classID,
+    };

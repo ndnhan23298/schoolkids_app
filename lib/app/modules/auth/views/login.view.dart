@@ -50,7 +50,7 @@ class LoginView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Email",
+                        "User Name",
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(height: 5),
@@ -75,10 +75,10 @@ class LoginView extends StatelessWidget {
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.only(top: 14),
                               prefixIcon: Icon(
-                                Icons.email,
+                                Icons.person,
                                 color: Colors.white,
                               ),
-                              hintText: "Enter your email",
+                              hintText: "Enter your username",
                               hintStyle:
                               TextStyle(color: Colors.white.withOpacity(0.5))),
                         ),

@@ -46,6 +46,7 @@ class AuthController extends GetxController {
     isLoggedIn.value = true;
     await _store.write(AppStorageKey.ACCESS_TOKEN, token);
   }
+
   handleAuthChanged(isLoggedIn) async {
     if (isLoggedIn) {
       Get.toNamed(Routes.USER_ACCESS);
@@ -56,9 +57,9 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     isLoggedIn.value = false;
-    //
     await _store.remove(AppStorageKey.ACCESS_TOKEN);
-    //
+    await _store.remove(AppStorageKey.classId);
+    await _store.remove(AppStorageKey.studentId);
     Get.offAllNamed(Routes.LOGIN);
   }
 

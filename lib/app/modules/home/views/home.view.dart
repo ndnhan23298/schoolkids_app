@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
           toolbarHeight: 70,
           backgroundColor: kPrimaryColor,
           title: Text(
-            "HOME",
+            "School Kids",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                                       style: TextStyle(color: Colors.black),
                                       children: [
                                         TextSpan(
-                                            text: ' Những em bé ngoan',
+                                            text: controller.nameAlbum,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black))
@@ -123,7 +123,9 @@ class HomeView extends StatelessWidget {
                         SizedBox(height: 20),
                         controller.isLoading.value
                             ? CircularProgressIndicator()
-                            : buildStackImage(controller)
+                            : controller.album != null && controller.album.value.images.length > 0
+                                ? buildStackImage(controller)
+                                : SizedBox()
                       ],
                     ),
                   ),
@@ -154,10 +156,16 @@ class HomeView extends StatelessWidget {
                   border: Border.all(color: Colors.pink.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
-                child: Image.network(
-                  "${controller.album.value.images[0]}",
-                  fit: BoxFit.cover,
-                ),
+                child: controller.album.value.images[2] != null
+                    ? Image.network(
+                        "${controller.album.value.images[2]}",
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        width: Get.width,
+                        height: Get.height,
+                        color: Colors.white,
+                      ),
               ),
             ),
           ),
@@ -171,10 +179,16 @@ class HomeView extends StatelessWidget {
                   border: Border.all(color: Colors.pink.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
-                child: Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage('assets/images/school.jpg'),
-                ),
+                child: controller.album.value.images[1] != null
+                    ? Image.network(
+                        "${controller.album.value.images[1]}",
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        width: Get.width,
+                        height: Get.height,
+                        color: Colors.white,
+                      ),
               ),
             ),
           ),
@@ -188,16 +202,22 @@ class HomeView extends StatelessWidget {
                   border: Border.all(color: Colors.pink.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
-                child: Image.network(
-                  "${controller.album.value.images[0]}",
-                  fit: BoxFit.cover,
-                ),
+                child: controller.album.value.images[0] != null
+                    ? Image.network(
+                        "${controller.album.value.images[0]}",
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        width: Get.width,
+                        height: Get.height,
+                        color: Colors.white,
+                      ),
               ),
             ),
           ),
         ],
       ),
-      onTap: (){
+      onTap: () {
         Get.toNamed(Routes.ALBUM);
       },
     );

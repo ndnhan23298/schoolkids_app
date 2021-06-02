@@ -4,9 +4,12 @@ import 'package:doan/app/data/models/album.model.dart';
 import 'package:doan/app/data/repositories/home.repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
-class HomeController extends GetxController {
+import 'package:doan/app/utils/keys.dart';
 
+class HomeController extends GetxController {
+  final _store = GetStorage();
   final HomeRepository repository;
 
   HomeController({@required this.repository})
@@ -15,6 +18,8 @@ class HomeController extends GetxController {
   static HomeController get to => Get.find<HomeController>();
   RxBool isLoading = false.obs;
   Rx<AlbumModel> album = AlbumModel().obs;
+  String nameAlbum;
+  RxList<String> albumDetail = RxList<String>([]);
 
   File _image;
   final picker = ImagePicker();
@@ -24,9 +29,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    classId = Get.arguments;
+    classId =_store.read(AppStorageKey.classId);
     if(classId != null){
-      getAlbum(classId);
+      await getAlbum(classId);
     }
     super.onInit();
   }
@@ -42,19 +47,24 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void getAlbum(String classId) async {
+  Future<void> getAlbum(String classId) async {
     isLoading.value = true;
     update();
     await repository.getAlbum(classId).then((response) {
       isLoading.value = false;
+      update();
       if (response != null) {
         album.value = response;
-        print(album.value.images[0]);
+        nameAlbum = album.value.name;
+        albumDetail.addAll(album.value.images);
+        List<String> listImg = [null, null, null];
+       for(int i = 0 ; i < (album.value.images.length < 3 ? album.value.images.length : 3) ; i++ ){
+         listImg[i] = album.value.images[i];
+       }
+       album.value.images.clear();
+       album.value.images.addAll(listImg);
       } else {
-        print("null");
-        // TODO: handle
       }
-      update();
     });
   }
 

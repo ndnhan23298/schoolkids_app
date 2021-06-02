@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 class NavigationController extends GetxController {
 
-  RxInt currentIndex = RxInt(0);
+  static RxInt currentIndex = RxInt(0);
 
   void selectedIndex(int index){
     currentIndex.value = index;

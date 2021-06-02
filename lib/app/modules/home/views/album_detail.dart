@@ -33,12 +33,13 @@ class DetailAlbumView extends StatelessWidget {
                     crossAxisSpacing: 10,
                     crossAxisCount: 2,
                   ),
-                  itemCount: controller.album.value.images.length,
+                  itemCount: controller.albumDetail.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final item = controller.albumDetail[index];
                     return ClipRRect(
                       borderRadius: new BorderRadius.circular(10.0),
                       child: Image.network(
-                        "${controller.album.value.images[index]}",
+                        "$item",
                         fit: BoxFit.cover,
                       ),
                     );

@@ -1,11 +1,15 @@
 import 'package:doan/app/data/models/user.model.dart';
+import 'package:doan/app/modules/navigation/controllers/navigation.controller.dart';
 import 'package:doan/app/routes/app_pages.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'package:doan/app/data/repositories/user.reponsitory.dart';
+import 'package:get_storage/get_storage.dart';
 
 class UserAccessController extends GetxController {
+  final _store = GetStorage();
   final UserRepository repository;
 
   UserAccessController({@required this.repository})
@@ -18,9 +22,11 @@ class UserAccessController extends GetxController {
   RxBool isLoading = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     _getUserAccess();
+    await _store.remove(AppStorageKey.classId);
+    await _store.remove(AppStorageKey.studentId);
     super.onInit();
   }
 
@@ -42,6 +48,7 @@ class UserAccessController extends GetxController {
       update();
       await repository.getListUserAccess().then((response) {
         isLoading.value = false;
+        update();
         if (response != null) {
           userAccess.value = response;
           if (userAccess.value != null) getListName(userAccess.value);
@@ -59,7 +66,7 @@ class UserAccessController extends GetxController {
   void getListName(UserAccess userAccess) {
     userAccess.classes.forEach((_) {
       DataAccessModel dataAccess = new DataAccessModel(
-        id: _.id,
+        // id: _.id,
         name: _.name,
         classId: _.id,
       );
@@ -73,6 +80,11 @@ class UserAccessController extends GetxController {
   }
 
   void onSelected(DataAccessModel dataAccess){
-    Get.toNamed(Routes.HOME, arguments: dataAccess.classId);
+    if(dataAccess.id != null){
+      _store.write(AppStorageKey.studentId, dataAccess.id);
+    }
+    _store.write(AppStorageKey.classId, dataAccess.classId);
+    NavigationController.currentIndex.value = 0;
+    Get.toNamed(Routes.HOME);
   }
 }

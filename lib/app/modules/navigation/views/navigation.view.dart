@@ -12,22 +12,21 @@ class NavigationView extends StatelessWidget {
       builder: (controller){
         return BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: controller.currentIndex.value,
+          currentIndex: NavigationController.currentIndex.value,
           backgroundColor: Colors.white,
           selectedItemColor: kPrimaryColor,
           unselectedItemColor: kPrimaryColor.withOpacity(0.4),
           unselectedLabelStyle: TextStyle(color: Colors.red),
           selectedIconTheme: IconThemeData(color: kPrimaryColor),
-
           onTap: (value){
             controller.selectedIndex(value);
-            if(value == 0){
+            if(NavigationController.currentIndex.value == 0){
               Get.toNamed(Routes.HOME);
             }
-            if(value == 1){
+            if(NavigationController.currentIndex.value == 1){
               Get.toNamed(Routes.FEATURE);
             }
-            if(value == 2){
+            if(NavigationController.currentIndex.value == 2){
               Get.toNamed(Routes.PROFILE);
             }
           },

@@ -28,3 +28,17 @@ class ActivityParamModel {
 
   Map<String, dynamic> toJson() => _$ActivityParamModelToJson(this);
 }
+
+@JsonSerializable(explicitToJson: true)
+class ParticipantParamModel {
+  String activityID;
+  String studentID;
+  String classID;
+
+  ParticipantParamModel({this.activityID, this.studentID, this.classID});
+
+  factory ParticipantParamModel.fromJson(Map<String, dynamic> json) =>
+      _$ParticipantParamModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ParticipantParamModelToJson(this);
+}

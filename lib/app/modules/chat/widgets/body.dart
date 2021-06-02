@@ -3,9 +3,12 @@ import 'package:doan/app/modules/chat/controllers/chat.controller.dart';
 import 'package:doan/app/theme/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:doan/app/utils/keys.dart';
 
 class Body extends StatelessWidget {
-  const Body({
+  final store = GetStorage();
+    Body({
     Key key,
   }) : super(key: key);
 
@@ -45,9 +48,9 @@ class Body extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
       child: Row(
         mainAxisAlignment:
-            message.sender.id == "8e6d497e-ebef-430f-af41-079e50eaddc4"
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.end,
+            message.target.id == Get.arguments
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
         children: [
           _buildWidgetMessage(message),
         ],
@@ -138,14 +141,14 @@ class Body extends StatelessWidget {
         padding: const EdgeInsets.all(kDefaultPadding),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: message.sender.id == "8e6d497e-ebef-430f-af41-079e50eaddc4"
+          color: message.target.id != Get.arguments
               ? kPrimaryColor.withOpacity(0.1)
               : kPrimaryColor,
         ),
         child: Text(
           message.content,
           style: TextStyle(
-              color: message.sender.id == "8e6d497e-ebef-430f-af41-079e50eaddc4"
+              color: message.target.id != Get.arguments
                   ? Colors.black
                   : Colors.white),
         ),

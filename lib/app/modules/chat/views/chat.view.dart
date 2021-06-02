@@ -31,21 +31,23 @@ class ChatView extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Covid19 EagleMvt',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                  'Active 3m ago',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Covid19 EagleMvt',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    'Active 3m ago',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
             )
           ],
         ),

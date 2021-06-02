@@ -1,3 +1,4 @@
+import 'package:doan/app/modules/navigation/views/navigation.view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:doan/app/modules/health_management/widgets/body.dart';
@@ -16,6 +17,7 @@ class HealthManagementView extends StatelessWidget {
         title: Text("Quản lý sức khỏe trẻ")
       ),
       body: Body(),
+      bottomNavigationBar: NavigationView(),
     );
   }
 }

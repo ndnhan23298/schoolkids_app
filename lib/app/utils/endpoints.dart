@@ -10,4 +10,10 @@ class Endpoint{
   static String ALBUM =  "$API/albums/class";
   static String UPDATE_ALBUM =  "$API/albums";
   static String UPLOAD_PHOTO =  "$API/images";
+  static String FEE_STUDENT =  "$API/fees/student";
+  static String FEE_CLASS =  "$API/fees";
+  static String HEALTH =  "$API/health";
+  static String STUDENT_BY_CLASS = "$API/students/class";
+  static String PARTICIPANT = "$API/participants";
+  static String LEAVE_DAY = "$API/leave-day";
 }
