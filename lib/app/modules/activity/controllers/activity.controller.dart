@@ -1,23 +1,24 @@
 import 'package:doan/app/data/models/activity.model.dart';
+import 'package:doan/app/data/models/participant2.model.dart';
 import 'package:doan/app/data/repositories/activity.repository.dart';
 import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-class ActivityController extends GetxController {
 
+class ActivityController extends GetxController {
   final ActivityRepository repository;
   final _store = GetStorage();
-  ActivityController({@required this.repository}) : assert (repository != null);
+
+  ActivityController({@required this.repository}) : assert(repository != null);
 
   Rx<TextEditingController> nameActivity = TextEditingController().obs;
   Rx<TextEditingController> content = TextEditingController().obs;
-  RxList<ActivityModel> activitiess =  RxList<ActivityModel>([]);
-  RxList<ActivityModel> joinedActivitiess =  RxList<ActivityModel>([]);
+  RxList<ActivityModel> activitiess = RxList<ActivityModel>([]);
+  RxList<ParticipantModel> participants = RxList<ParticipantModel>([]);
+  RxList<ActivityModel> joinedActivitiess = RxList<ActivityModel>([]);
   RxBool isLoadding = false.obs;
-
-
 
   @override
   void onInit() async {
@@ -26,77 +27,89 @@ class ActivityController extends GetxController {
     super.onInit();
   }
 
-  Future<void> _getActivities() async{
+  Future<void> _getActivities() async {
     isLoadding.value = true;
     update();
     try {
-      await repository.getActivities().then((response){
+      await repository.getActivities().then((response) {
         isLoadding.value = false;
         update();
-        if(response != null){
+        if (response != null) {
           activitiess.addAll(response);
         }
       });
-    }catch (e) {
-
-    }
+    } catch (e) {}
   }
 
-  Future<void> _getJoinedActivities() async{
+  Future<void> getParticipant() async {
+    isLoadding.value = true;
+    update();
+    participants.clear();
+    try {
+      final activityID = Get.arguments;
+      final classID = _store.read(AppStorageKey.classId);
+      await repository.getParticipants(activityID, classID).then((response) {
+        isLoadding.value = false;
+        update();
+        if (response != null) {
+          participants.addAll(response);
+          update();
+        }
+      });
+    } catch (e) {}
+  }
+
+  Future<void> _getJoinedActivities() async {
     isLoadding.value = true;
     update();
     try {
       String studentID = _store.read(AppStorageKey.studentId);
-      await repository.getJoinedActivities(studentID).then((response){
+      await repository.getJoinedActivities(studentID).then((response) {
         isLoadding.value = false;
         update();
-        if(response != null){
+        if (response != null) {
           activitiess.addAll(response['listActitities']);
           joinedActivitiess.addAll(response['listJoinedActitities']);
         }
       });
-    }catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   Future<void> onSave() async {
     ActivityParamModel activityParam = ActivityParamModel(
-      name: nameActivity.value.text,
-      address: content.value.text
-    );
-    try{
+        name: nameActivity.value.text, address: content.value.text);
+    try {
       isLoadding.value = true;
       update();
-      await repository.createActivities(activityParam).then((response){
+      await repository.createActivities(activityParam).then((response) {
         isLoadding.value = false;
         update();
-        if(response != null && response == true){
+        if (response != null && response == true) {
           Get.back();
         }
       });
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
 
   Future<void> onJoin(String activityID) async {
     ParticipantParamModel participantParam = ParticipantParamModel(
-        studentID: _store.read(AppStorageKey.studentId),
-        classID: _store.read(AppStorageKey.classId),
-        activityID: activityID,
+      studentID: _store.read(AppStorageKey.studentId),
+      classID: _store.read(AppStorageKey.classId),
+      activityID: activityID,
     );
-    try{
+    try {
       isLoadding.value = true;
       update();
-      await repository.createParticipants(participantParam).then((response){
+      await repository.createParticipants(participantParam).then((response) {
         isLoadding.value = false;
         update();
-        if(response != null && response == true){
+        if (response != null && response == true) {
           Get.back();
         }
       });
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }

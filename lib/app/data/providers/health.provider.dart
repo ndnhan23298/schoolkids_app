@@ -40,19 +40,31 @@ class HealthProvider extends GetConnect {
     }
   }
 
-  Future<List<HealthManagementModel>> getStudentByClass() async {
+  Future<List<StudentModel>> getStudentByClass() async {
     final _store = GetStorage();
     try {
       final response = await HttpHelper.get("${Endpoint.STUDENT_BY_CLASS}?classID=${_store.read(AppStorageKey.classId)}");
       if (response != null) {
-        final result = response.body.map<HealthManagementModel>((_){
-          return HealthManagementModel.fromJson(_);
+        final result = response.body.map<StudentModel>((_){
+          return StudentModel.fromJson(_);
         }).toList();
         return result;
       }
       return [];
     } catch (e) {
       return [];
+    }
+  }
+
+  Future<StudentModel> getStudentDetail(String studentID) async {
+    try {
+      final response = await HttpHelper.get("${Endpoint.STUDENT_DETAIL}/$studentID");
+      if (response != null) {
+          return StudentModel.fromJson(response.body);
+        }
+        return null;
+    } catch (e) {
+      return null;
     }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doan/app/data/models/album.model.dart';
 import 'package:doan/app/data/repositories/home.repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,6 +11,8 @@ import 'package:doan/app/utils/keys.dart';
 
 class HomeController extends GetxController {
   final _store = GetStorage();
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   final HomeRepository repository;
 
   HomeController({@required this.repository})
@@ -33,6 +36,7 @@ class HomeController extends GetxController {
     if(classId != null){
       await getAlbum(classId);
     }
+    firebaseCloudMessaging_Listeners();
     super.onInit();
   }
 
@@ -56,6 +60,7 @@ class HomeController extends GetxController {
       if (response != null) {
         album.value = response;
         nameAlbum = album.value.name;
+        albumDetail.clear();
         albumDetail.addAll(album.value.images);
         List<String> listImg = [null, null, null];
        for(int i = 0 ; i < (album.value.images.length < 3 ? album.value.images.length : 3) ; i++ ){
@@ -69,13 +74,14 @@ class HomeController extends GetxController {
   }
 
   Future upLoadPhoto() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if(pickedFile != null){
       _image = File(pickedFile.path);
       try{
         await repository.upLoadPhoto(_image).then((response){
          path = response;
          if(path != null){
+           albumDetail.add(path);
            updateAlbum();
          }
         });
@@ -96,6 +102,26 @@ class HomeController extends GetxController {
       }
       update();
     });
+  }
+
+  void firebaseCloudMessaging_Listeners() {
+
+    _firebaseMessaging.getToken().then((token) async {
+      await repository.firebase(token);
+      print(token);
+    });
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+      },
+    );
   }
 
 }

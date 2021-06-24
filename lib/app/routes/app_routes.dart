@@ -16,4 +16,5 @@ abstract class Routes {
   static const ALBUM = '/album';
   static const LIST_USER = '/users';
   static const TUITION = '/tuition';
+  static const PARTICIPANT = '/participant';
 }

@@ -33,15 +33,15 @@ class NavigationView extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: "Home",
+              label: "Trang chủ",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.menu),
-              label: "Feature",
+              label: "Tính năng",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: "Profile",
+              label: "Thông tin",
             ),
           ],
         );

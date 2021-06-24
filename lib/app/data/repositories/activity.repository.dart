@@ -1,6 +1,7 @@
 
 
 import 'package:doan/app/data/models/activity.model.dart';
+import 'package:doan/app/data/models/participant2.model.dart';
 import 'package:doan/app/data/providers/activity.provider.dart';
 import 'package:meta/meta.dart';
 
@@ -10,6 +11,10 @@ class ActivityRepository {
 
   Future<List<ActivityModel>> getActivities() async {
    return apiClient.getActivities();
+  }
+
+  Future<List<ParticipantModel>> getParticipants(String activityID, String classID) async {
+    return apiClient.getParticipants(activityID, classID);
   }
 
   Future<dynamic> getJoinedActivities(String studentID) async {

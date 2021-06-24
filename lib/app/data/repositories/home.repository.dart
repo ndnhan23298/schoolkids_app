@@ -18,4 +18,8 @@ class HomeRepository {
   Future<bool> updateAlbum(String albumId,String path) async {
     return apiClient.updateAlbum(albumId, path);
   }
+
+  Future<String> firebase(String deviceToken) async {
+    return apiClient.firebase(deviceToken);
+  }
 }

@@ -77,13 +77,24 @@ class UserAccessController extends GetxController {
           id: _.id, name: _.firstName + _.lastName, classId: _.classID);
       data.add(dataAccess);
     });
+    userAccess.schools.forEach((_) {
+      DataAccessModel dataAccess = new DataAccessModel(
+          name: _.name,
+          schoolId: _.id);
+      data.add(dataAccess);
+    });
   }
 
-  void onSelected(DataAccessModel dataAccess){
-    if(dataAccess.id != null){
+  void onSelected(DataAccessModel dataAccess) {
+    if (dataAccess.id != null) {
       _store.write(AppStorageKey.studentId, dataAccess.id);
     }
-    _store.write(AppStorageKey.classId, dataAccess.classId);
+    if  (dataAccess.classId != null) {
+      _store.write(AppStorageKey.classId, dataAccess.classId);
+    }
+    if  (dataAccess.schoolId != null) {
+      _store.write(AppStorageKey.schoolId, dataAccess.schoolId);
+    }
     NavigationController.currentIndex.value = 0;
     Get.toNamed(Routes.HOME);
   }

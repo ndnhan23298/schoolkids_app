@@ -138,7 +138,7 @@ class Body extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
                   padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
                   width: Get.width,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -151,9 +151,10 @@ class Body extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        width: 40,
+                        width: 70,
                         height: Get.height,
-                        color: Colors.blue,
+                        child:
+                        Image.asset('assets/images/swap_icon.png'),
                       ),
                       SizedBox(width: 15),
                       Expanded(child: Text("Đổi tài khoản", style: TextStyle(
@@ -172,7 +173,7 @@ class Body extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
                   padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
                   width: Get.width,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -185,9 +186,10 @@ class Body extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        width: 40,
+                        width: 70,
                         height: Get.height,
-                        color: Colors.blue,
+                        child:
+                        Image.asset('assets/images/logout_icon.png'),
                       ),
                       SizedBox(width: 15),
                       Expanded(child: Text("Logout", style: TextStyle(

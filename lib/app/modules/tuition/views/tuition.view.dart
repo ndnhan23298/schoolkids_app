@@ -15,47 +15,47 @@ class TuitionView extends StatelessWidget {
           toolbarHeight: 70,
           elevation: 0,
           backgroundColor: kPrimaryColor,
-          title: Text("Hoc Phi")),
+          title: Text("Học phí")),
       body: GetBuilder<TuitionController>(
           init: Get.find(),
           builder: (controller) {
             return controller.store.read(AppStorageKey.studentId) != null
                 ? HorizontalDataTable(
-                    leftHandSideColumnWidth: 150,
-                    rightHandSideColumnWidth: 300,
+                    leftHandSideColumnWidth: 80,
+                    rightHandSideColumnWidth: 350,
                     isFixedHeader: true,
                     headerWidgets: [
                       Container(
-                        child: Text("Thang",
+                        child: Text("Tháng",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        width: 80,
+                        height: 56,
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        alignment: Alignment.center,
+                      ),
+                      Container(
+                        child: Text("Học sinh",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         width: 150,
                         height: 56,
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       ),
                       Container(
-                        child: Text("Student",
+                        child: Text("Tình trạng",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         width: 100,
                         height: 56,
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       ),
                       Container(
-                        child: Text("Trang Thai",
+                        child: Text("Học phí",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         width: 100,
                         height: 56,
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
-                      ),
-                      Container(
-                        child: Text("Hoc Phi",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        width: 100,
-                        height: 56,
-                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       ),
                     ],
                     leftSideItemBuilder: _generateFirstColumnRowStudent,
@@ -69,36 +69,33 @@ class TuitionView extends StatelessWidget {
                     ),
                   )
                 : HorizontalDataTable(
-                    leftHandSideColumnWidth: 150,
+                    leftHandSideColumnWidth: 80,
                     rightHandSideColumnWidth: 300,
                     isFixedHeader: true,
                     headerWidgets: [
                       Container(
-                        child: Text("Thang",
+                        child: Text("Tháng",
                             style: TextStyle(fontWeight: FontWeight.bold)),
-                        width: 150,
+                        width: 80,
                         height: 56,
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       ),
                       Container(
-                        child: Text("Student",
+                        child: Text("Học sinh",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         width: 150,
                         height: 56,
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Container(
-                          child: Text("Trang Thai",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          width: 150,
-                          height: 56,
-                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          alignment: Alignment.centerLeft,
-                        ),
+                      Container(
+                        child: Text("Tình trạng",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        width: 150,
+                        height: 56,
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        alignment: Alignment.center,
                       ),
                     ],
                     leftSideItemBuilder: _generateFirstColumnRowClass,
@@ -137,7 +134,7 @@ class TuitionView extends StatelessWidget {
                 width: 150,
                 height: 52,
                 padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
               ),
               Divider(
                 thickness: 1,
@@ -154,31 +151,32 @@ class TuitionView extends StatelessWidget {
     return GetBuilder<TuitionController>(
         init: Get.find(),
         builder: (controller) {
+          final name =
+              "${controller.studentTuition[index].studentID.firstName} ${controller.studentTuition[index].studentID.lastName}";
           return Column(
             children: [
               Row(
                 children: <Widget>[
                   Container(
-                    child:
-                        Text("${controller.studentTuition[index].studentID}"),
-                    width: 100,
+                    child: Text(name),
+                    width: 150,
                     height: 52,
                     padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                   ),
                   Container(
                     child: Text("${controller.studentTuition[index].status}"),
                     width: 100,
                     height: 52,
                     padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                   ),
                   Container(
                     child: Text("${controller.studentTuition[index].fee}"),
                     width: 100,
                     height: 52,
                     padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                   ),
                 ],
               ),
@@ -203,7 +201,7 @@ class TuitionView extends StatelessWidget {
                 width: 150,
                 height: 52,
                 padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
               ),
               Divider(
                 thickness: 1,
@@ -219,26 +217,27 @@ class TuitionView extends StatelessWidget {
     return GetBuilder<TuitionController>(
         init: Get.find(),
         builder: (controller) {
+          final name =
+              "${controller.classTuition[index].studentID.firstName}  ${controller.classTuition[index].studentID.lastName}";
           return Column(
             children: [
               Row(
                 children: <Widget>[
                   Container(
-                    child: Text("${controller.classTuition[index].studentID}"),
+                    child: Text(name),
                     width: 150,
                     height: 52,
                     padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                  Container(
                     child: InkWell(
                       child: Row(
                         children: [
                           Container(
-                            child:
-                                Text("${controller.classTuition[index].status}"),
-                            width: 100,
+                            child: Text(
+                                "${controller.classTuition[index].status}"),
+                            width: 110,
                             height: 52,
                             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
                             alignment: Alignment.centerLeft,
@@ -246,7 +245,7 @@ class TuitionView extends StatelessWidget {
                           Icon(
                             Icons.swap_horiz_outlined,
                             color: Colors.pink,
-                          )
+                          ),
                         ],
                       ),
                       onTap: () {

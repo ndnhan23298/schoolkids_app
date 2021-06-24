@@ -41,6 +41,31 @@ class ChatController extends GetxController {
     }
 
     socket.on('message', (data){
+      MessageModel newMessage = MessageModel.fromJson(data);
+
+      bool shouldShowMessage = false;
+      final currentUserId = store.read(AppStorageKey.userId);
+      
+      if (newMessage.sender != null &&
+          newMessage.target != null &&
+          newMessage.sender.id == Get.arguments &&
+          newMessage.target.id == currentUserId
+      ) {
+        shouldShowMessage = true;
+      }
+
+      if (newMessage.sender != null &&
+          newMessage.target != null &&
+          newMessage.target.id == Get.arguments &&
+          newMessage.sender.id == currentUserId
+      ) {
+        shouldShowMessage = true;
+      }
+
+      if (!shouldShowMessage) {
+        return;
+      }
+
       messages.insert(0,MessageModel.fromJson(data));
       update();
     });
@@ -107,10 +132,13 @@ class ChatController extends GetxController {
     if(messageSend != null){
       onSend(messageSend);
     }
+
+    textChatController.value.clear();
+    update();
   }
 
   void onSentMessagePhoto() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if(pickedFile != null){
       _image = File(pickedFile.path);
       try{

@@ -1,4 +1,5 @@
 import 'package:doan/app/data/models/activity.model.dart';
+import 'package:doan/app/data/models/participant2.model.dart';
 import 'package:doan/app/utils/endpoints.dart';
 import 'package:doan/app/utils/http_utils.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,21 @@ class ActivityProvider extends GetConnect {
       return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<List<ParticipantModel>> getParticipants(String activityID, String classID) async {
+    try {
+      final response = await HttpHelper.get("${Endpoint.PARTICIPANT}?activityID=${activityID}&classID=${classID}");
+      if (response != null) {
+        final listParticipants = response.body.map<ParticipantModel>((_){
+          return ParticipantModel.fromJson(_);
+        }).toList();
+        return listParticipants;
+      }
+      return [];
+    } catch (e) {
+      return [];
     }
   }
 

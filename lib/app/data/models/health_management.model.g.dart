@@ -6,9 +6,8 @@ part of 'health_management.model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HealthManagementModel _$HealthManagementModelFromJson(
-    Map<String, dynamic> json) {
-  return HealthManagementModel(
+StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
+  return StudentModel(
     firstName: json['firstName'] as String,
     lastName: json['lastName'] as String,
     id: json['id'] as String,
@@ -16,8 +15,7 @@ HealthManagementModel _$HealthManagementModelFromJson(
   );
 }
 
-Map<String, dynamic> _$HealthManagementModelToJson(
-        HealthManagementModel instance) =>
+Map<String, dynamic> _$StudentModelToJson(StudentModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'firstName': instance.firstName,

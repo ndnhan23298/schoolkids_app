@@ -18,13 +18,14 @@ class BodyDetailHealthStudent extends StatelessWidget {
             itemBuilder: (context, index) {
               return Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
+                    horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding * 1.5),
                 margin: const EdgeInsets.only(
-                    top: kDefaultPadding * 2,
+                    top: kDefaultPadding,
                     left: kDefaultPadding * 2,
-                    right: kDefaultPadding * 2),
+                    right: kDefaultPadding * 2,
+                    bottom: kDefaultPadding),
                 width: Get.width,
-                height: 100,
+                height: 110,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -42,7 +43,7 @@ class BodyDetailHealthStudent extends StatelessWidget {
                             flex: 1,
                             child: RichText(
                               text: TextSpan(
-                                  text: "Height: ",
+                                  text: "Chiều cao: ",
                                   style: TextStyle(
                                     color: Colors.black,
                                   ),
@@ -58,7 +59,7 @@ class BodyDetailHealthStudent extends StatelessWidget {
                             flex: 1,
                             child: RichText(
                               text: TextSpan(
-                                  text: "Weight: ",
+                                  text: "Cân nặng: ",
                                   style: TextStyle(
                                     color: Colors.black,
                                   ),
@@ -70,11 +71,16 @@ class BodyDetailHealthStudent extends StatelessWidget {
                                         ))
                                   ]),
                             )),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
                         Expanded(
                             flex: 1,
                             child: RichText(
                               text: TextSpan(
-                                  text: "Date: ",
+                                  text: "Thời gian: ",
                                   style: TextStyle(
                                     color: Colors.black,
                                   ),
@@ -88,32 +94,35 @@ class BodyDetailHealthStudent extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SizedBox(height: 5),
-                    Expanded(
-                        flex: 1,
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Note: ",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              children: [
-                                TextSpan(
-                                    text: controller.studentHealth[index].note,
-                                    style: TextStyle(
-                                      color: kPrimaryColor,
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: RichText(
+                              text: TextSpan(
+                                  text: "Chi tiết: ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                        text: controller.studentHealth[index].note,
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                        )
                                     )
-                                )
-                              ]
-                          ),
-                        )
-                    ),
+                                  ]
+                              ),
+                            )
+                        ),
+                      ],
+                    )
                   ],
                 ),
               );
             },
           );
         });
-
   }
 }

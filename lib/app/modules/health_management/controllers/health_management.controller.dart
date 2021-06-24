@@ -15,7 +15,8 @@ class HealthManagementController extends GetxController {
   Rx<TextEditingController> weight = TextEditingController().obs;
   Rx<TextEditingController> note = TextEditingController().obs;
   RxList<HealthModel> studentHealth =  RxList<HealthModel>([]);
-  RxList<HealthManagementModel> studentByClass =  RxList<HealthManagementModel>([]);
+  RxList<StudentModel> studentByClass =  RxList<StudentModel>([]);
+  StudentModel studentDetail;
   RxBool isLoadding = false.obs;
   String studentID = null;
 
@@ -49,18 +50,40 @@ class HealthManagementController extends GetxController {
     isLoadding.value = true;
     update();
     try {
-      await repository.getHealthStudent(studentId).then((response){
+      StudentModel student = await repository.getStudentDetail(studentID);
+
+      if (student != null) {
+        this.studentDetail = student;
+      }
+
+      List<HealthModel> response = await repository.getHealthStudent(studentId);
+
+      isLoadding.value = false;
+      update();
+      if(response != null){
+        studentHealth.clear();
+        studentHealth.addAll(response);
+
+      }
+    }catch (e) {
+    }
+  }
+
+  Future<void> getStudentDetail() async{
+    isLoadding.value = true;
+    update();
+    try {
+      await repository.getStudentDetail(_store.read((AppStorageKey.studentId))).then((response){
         isLoadding.value = false;
         update();
         if(response != null){
-          studentHealth.clear();
-          studentHealth.addAll(response);
+          studentDetail = response;
         }
       });
     }catch (e) {
-
     }
   }
+
 
   Future<void> onSave() async {
     HealthParamModel healthParam = HealthParamModel(

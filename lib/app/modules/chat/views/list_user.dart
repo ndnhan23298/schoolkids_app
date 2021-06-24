@@ -1,20 +1,24 @@
 import 'package:doan/app/modules/chat/controllers/chat.controller.dart';
 import 'package:doan/app/routes/app_pages.dart';
+import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:doan/app/theme/color_theme.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ListUserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final store = GetStorage();
+    final currentUserId = store.read(AppStorageKey.userId);
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
           toolbarHeight: 70,
           elevation: 0,
           backgroundColor: kPrimaryColor,
-          title: Text("Các chức năng chính")),
+          title: Text("Tin nhắn")),
       body: GetBuilder<ChatController>(
           init: Get.find(),
           builder: (controller) {
@@ -24,9 +28,17 @@ class ListUserView extends StatelessWidget {
                     itemCount: controller.users.length,
                     itemBuilder: (BuildContext context, int index) {
                       final item = controller.users[index];
+
+                      String ownerMarker = "";
+
+                      if (item.id == currentUserId) {
+                        ownerMarker = " (Bạn)";
+                      }
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.CHAT, arguments: item.id);
+                          Get.toNamed(Routes.CHAT, arguments: item.id, parameters: {
+                            "partner": "${item.firstName} ${item.lastName}"
+                          });
                           controller.getListMessage(item);
                         },
                         child: Container(
@@ -52,12 +64,12 @@ class ListUserView extends StatelessWidget {
                                 width: 70,
                                 height: 70,
                                 child:
-                                    Image.asset('assets/images/calendar.png'),
+                                    Image.asset('assets/images/user_chat_icon.png'),
                               ),
                               SizedBox(width: 10),
                               Expanded(
                                 child: Text(
-                                  item.userName,
+                                  "${item.firstName} ${item.lastName}${ownerMarker}",
                                   style: TextStyle(
                                       color: kPrimaryColor, fontSize: 18),
                                 ),

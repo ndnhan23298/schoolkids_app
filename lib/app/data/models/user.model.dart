@@ -141,6 +141,7 @@ class DataAccessModel {
   String id;
   String name;
   String classId;
+  String schoolId;
 
-  DataAccessModel({this.id, this.name,this.classId});
+  DataAccessModel({this.id, this.name,this.classId, this.schoolId});
 }

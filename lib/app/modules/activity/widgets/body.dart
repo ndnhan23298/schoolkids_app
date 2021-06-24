@@ -42,7 +42,7 @@ class Body extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Name Activity',
+                                  'Hoạt động',
                                   style: TextStyle(
                                       color: kPrimaryColor, fontSize: 16),
                                 ),
@@ -70,7 +70,7 @@ class Body extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Content',
+                                  'Thông tin chi tiết',
                                   style: TextStyle(
                                       color: kPrimaryColor, fontSize: 16),
                                 ),
@@ -104,7 +104,7 @@ class Body extends StatelessWidget {
                                 ),
                                 color: kPrimaryColor,
                                 child: Text(
-                                  "SAVE",
+                                  "Thêm mới",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,

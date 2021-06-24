@@ -1,6 +1,7 @@
 import 'package:doan/app/modules/activity/bindings/activity.binding.dart';
 import 'package:doan/app/modules/activity/views/activity.view.dart';
 import 'package:doan/app/modules/activity/views/extracurricular_activity.view.dart';
+import 'package:doan/app/modules/activity/views/participant.view.dart';
 import 'package:doan/app/modules/auth/bindings/auth.binding.dart';
 import 'package:doan/app/modules/auth/views/splash.view.dart';
 import 'package:doan/app/modules/chat/views/list_user.dart';
@@ -47,6 +48,12 @@ class AppPages {
     GetPage(
       name: Routes.ACTIVITY,
       page: () => ActivityView(),
+      binding: ActivityBinding(),
+    ),
+
+    GetPage(
+      name: Routes.PARTICIPANT,
+      page: () => ParticipantView(),
       binding: ActivityBinding(),
     ),
 

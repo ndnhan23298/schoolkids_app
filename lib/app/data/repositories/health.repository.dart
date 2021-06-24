@@ -11,7 +11,11 @@ class HealthRepository {
     return apiClient.getHealthStudent(studentId);
   }
 
-  Future<List<HealthManagementModel>> getStudentByClass() async {
+  Future<StudentModel> getStudentDetail(String studentID) async {
+    return apiClient.getStudentDetail(studentID);
+  }
+
+  Future<List<StudentModel>> getStudentByClass() async {
     return apiClient.getStudentByClass();
   }
 

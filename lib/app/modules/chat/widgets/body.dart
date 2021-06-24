@@ -78,8 +78,8 @@ class Body extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                   child: Row(
                     children: [
-                      Icon(Icons.sentiment_satisfied_alt_outlined),
-                      SizedBox(width: 10),
+                      // Icon(Icons.sentiment_satisfied_alt_outlined),
+                      SizedBox(width: 20),
                       Expanded(
                         child: TextFormField(
                           controller: controller.textChatController.value,
@@ -91,10 +91,10 @@ class Body extends StatelessWidget {
                               border: InputBorder.none),
                         ),
                       ),
-                      Icon(
-                        Icons.file_present,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
+                      // Icon(
+                      //   Icons.file_present,
+                      //   color: Colors.black.withOpacity(0.5),
+                      // ),
                       SizedBox(
                         width: 5,
                       ),

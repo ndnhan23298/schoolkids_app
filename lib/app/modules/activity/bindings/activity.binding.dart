@@ -14,14 +14,6 @@ class ActivityBinding extends Bindings {
       ),
     );
 
-    Get.lazyPut<ActivityController>(
-          () => ActivityController(
-        repository: ActivityRepository(
-          apiClient: ActivityProvider(),
-        ),
-      ),
-    );
-
     Get.lazyPut<NavigationController>(() => NavigationController());
   }
 }

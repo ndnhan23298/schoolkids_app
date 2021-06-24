@@ -32,17 +32,18 @@ class AddDetailHealth extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "NEW HEALTH",
+                    "Cập Nhật Sức Khoẻ",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor),
                   ),
+                  SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Height',
+                        'Chiều cao',
                         style: TextStyle(color: kPrimaryColor, fontSize: 16),
                       ),
                       SizedBox(height: 5),
@@ -66,7 +67,7 @@ class AddDetailHealth extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Weight',
+                        'Cân nặng',
                         style: TextStyle(color: kPrimaryColor, fontSize: 16),
                       ),
                       SizedBox(height: 5),
@@ -90,7 +91,7 @@ class AddDetailHealth extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Note',
+                        'Chi tiết',
                         style: TextStyle(color: kPrimaryColor, fontSize: 16),
                       ),
                       SizedBox(height: 5),
@@ -120,7 +121,7 @@ class AddDetailHealth extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       color: kPrimaryColor,
-                      child: Text("SAVE", style: TextStyle(
+                      child: Text("Cập nhật", style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold

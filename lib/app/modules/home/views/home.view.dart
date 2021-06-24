@@ -27,106 +27,111 @@ class HomeView extends StatelessWidget {
             init: Get.find(),
             builder: (controller) {
               return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Container(
-                    width: Get.width,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                child: Icon(
-                                  Icons.image,
-                                  color: Colors.green,
-                                ),
-                              ),
-                              SizedBox(width: 7),
-                              Expanded(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Album',
-                                      style: TextStyle(color: Colors.black),
-                                      children: [
-                                        TextSpan(
-                                            text: controller.nameAlbum,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black))
-                                      ]),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1,
-                          color: Colors.pink,
-                        ),
-                        Container(
-                          height: 40,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                child: ClipRRect(
-                                  borderRadius: new BorderRadius.circular(50),
-                                  child: Image(
-                                    fit: BoxFit.fill,
-                                    image:
-                                        AssetImage('assets/images/school.jpg'),
+                child: RefreshIndicator(
+                  onRefresh: () {
+                    controller.getAlbum(controller.classId);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
+                      width: Get.width,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  child: Icon(
+                                    Icons.image,
+                                    color: Colors.green,
                                   ),
                                 ),
-                              ),
-                              SizedBox(width: 7),
-                              Expanded(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 2),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                            text: 'Cô giáo Hoa Sen',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                            children: [
-                                              TextSpan(
-                                                text: ' đã thêm 4 ảnh mới',
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                            ]),
-                                      ),
-                                      Text(
-                                        'Hoa Sen - Thứ 7, 14/09/2019',
+                                SizedBox(width: 7),
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Album ',
                                         style: TextStyle(color: Colors.black),
-                                      ),
-                                    ],
+                                        children: [
+                                          TextSpan(
+                                              text: controller.nameAlbum,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black))
+                                        ]),
                                   ),
                                 ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 20),
-                        controller.isLoading.value
-                            ? CircularProgressIndicator()
-                            : controller.album != null && controller.album.value.images.length > 0
-                                ? buildStackImage(controller)
-                                : SizedBox()
-                      ],
+                          Divider(
+                            thickness: 1,
+                            color: Color(0xFF81E272),
+                          ),
+                          // Container(
+                          //   height: 40,
+                          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                          //   child: Row(
+                          //     children: [
+                          //       Container(
+                          //         width: 40,
+                          //         height: 40,
+                          //         child: ClipRRect(
+                          //           borderRadius: new BorderRadius.circular(50),
+                          //           child: Image(
+                          //             fit: BoxFit.fill,
+                          //             image:
+                          //             AssetImage('assets/images/school.jpg'),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       SizedBox(width: 7),
+                          //       Expanded(
+                          //         child: Padding(
+                          //           padding:
+                          //           const EdgeInsets.symmetric(vertical: 2),
+                          //           child: Column(
+                          //             mainAxisAlignment:
+                          //             MainAxisAlignment.spaceBetween,
+                          //             crossAxisAlignment:
+                          //             CrossAxisAlignment.start,
+                          //             children: [
+                          //               RichText(
+                          //                 text: TextSpan(
+                          //                     text: 'Cô giáo Hoa Sen',
+                          //                     style: TextStyle(
+                          //                         color: Colors.black,
+                          //                         fontWeight: FontWeight.bold),
+                          //                     children: [
+                          //                       TextSpan(
+                          //                         text: ' đã thêm 4 ảnh mới',
+                          //                         style: TextStyle(
+                          //                             color: Colors.black),
+                          //                       ),
+                          //                     ]),
+                          //               ),
+                          //               Text(
+                          //                 'Hoa Sen - Thứ 7, 14/09/2019',
+                          //                 style: TextStyle(color: Colors.black),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
+                          SizedBox(height: 10),
+                          controller.isLoading.value
+                              ? CircularProgressIndicator()
+                              : controller.album != null && controller.album.value.images.length > 0
+                              ? buildStackImage(controller)
+                              : SizedBox()
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -153,7 +158,7 @@ class HomeView extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.pink.withOpacity(0.5))),
+                  border: Border.all(color: Colors.white.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
                 child: controller.album.value.images[2] != null
@@ -176,7 +181,7 @@ class HomeView extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.pink.withOpacity(0.5))),
+                  border: Border.all(color: Colors.white.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
                 child: controller.album.value.images[1] != null
@@ -199,7 +204,7 @@ class HomeView extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.pink.withOpacity(0.5))),
+                  border: Border.all(color: Colors.white.withOpacity(0.5))),
               child: ClipRRect(
                 borderRadius: new BorderRadius.circular(10.0),
                 child: controller.album.value.images[0] != null

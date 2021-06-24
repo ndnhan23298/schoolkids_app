@@ -30,6 +30,23 @@ class HomeProvider extends GetConnect {
     }
   }
 
+  Future<String> firebase(String deviceToken) async {
+    try {
+      final response = await HttpHelper.post("${Endpoint.FIREBASE}", {
+        "token": deviceToken
+      });
+
+      print(response.body);
+
+      if(response != null){
+        return response.body;
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<bool> updateAlbum(String albumId,String path) async {
     try {
       final data = {

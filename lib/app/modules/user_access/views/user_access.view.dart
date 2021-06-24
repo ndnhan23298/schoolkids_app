@@ -17,7 +17,7 @@ class UserAccessView extends StatelessWidget {
               width: Get.width,
               height: Get.height,
               alignment: Alignment.center,
-              color: Colors.pink,
+              color: Color(0xFF81E272),
               child: controller.isLoading.value
                   ? Center(
                       child: CircularProgressIndicator(),

@@ -11,6 +11,7 @@ class ExtracurricularActivityView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 70,
+        centerTitle: true,
         backgroundColor: kPrimaryColor,
         leading: GestureDetector(
           child: Icon(

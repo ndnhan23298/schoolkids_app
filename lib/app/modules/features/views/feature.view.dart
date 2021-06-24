@@ -8,8 +8,8 @@ import 'package:doan/app/theme/color_theme.dart';
 import 'package:get_storage/get_storage.dart';
 
 class FeaturesView extends StatelessWidget {
-
   final _store = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +92,7 @@ class FeaturesView extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              _store.read(AppStorageKey.studentId) != null || _store.read(AppStorageKey.schoolId) != null ? GestureDetector(
                 onTap: (){
                   Get.toNamed(Routes.TUITION);
                 },
@@ -126,7 +126,7 @@ class FeaturesView extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              ) : SizedBox(),
               GestureDetector(
                 onTap: (){
                   Get.toNamed(Routes.LIST_USER);
@@ -175,7 +175,8 @@ class FeaturesView extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       top: kDefaultPadding * 2,
                       left: kDefaultPadding * 2,
-                      right: kDefaultPadding * 2),
+                      right: kDefaultPadding * 2,
+                      bottom: kDefaultPadding * 2),
                   width: Get.width,
                   height: 80,
                   decoration: BoxDecoration(

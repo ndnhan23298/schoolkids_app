@@ -31,8 +31,11 @@ class UserProvider extends GetConnect {
      UserLoginModel userLoginModel = UserLoginModel.fromJson(result.body);
      if(userLoginModel != null){
        final validUsers = userLoginModel.accessToken;
+       final userId = userLoginModel.userId;
+
        if(validUsers.isNotEmpty){
          await _store.write(AppStorageKey.ACCESS_TOKEN, validUsers);
+         await _store.write(AppStorageKey.userId, userId);
          return true;
        }
        return false;

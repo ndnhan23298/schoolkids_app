@@ -19,10 +19,10 @@ class LoginView extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Color(0xFF73AEF5),
-              Color(0xFF61A4F1),
-              Color(0xFF478DE0),
-              Color(0xFF398AE5),
+              Color(0xFF81E272),
+              Color(0xFF7BE369),
+              Color(0xFF61DE4E),
+              Color(0xFF5BE545),
             ]),),
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
@@ -59,7 +59,7 @@ class LoginView extends StatelessWidget {
                         height: 50,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Color(0xFF73AEF5),
+                            color: Color(0xFF85DE77),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
@@ -99,7 +99,7 @@ class LoginView extends StatelessWidget {
                         height: 50,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Color(0xFF73AEF5),
+                            color: Color(0xFF85DE77),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(

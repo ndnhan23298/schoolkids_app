@@ -60,6 +60,8 @@ class AuthController extends GetxController {
     await _store.remove(AppStorageKey.ACCESS_TOKEN);
     await _store.remove(AppStorageKey.classId);
     await _store.remove(AppStorageKey.studentId);
+    await _store.remove(AppStorageKey.schoolId);
+    await _store.remove(AppStorageKey.userId);
     Get.offAllNamed(Routes.LOGIN);
   }
 

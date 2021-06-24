@@ -1,3 +1,4 @@
+import 'package:doan/app/modules/health_management/controllers/health_management.controller.dart';
 import 'package:doan/app/modules/navigation/views/navigation.view.dart';
 import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import 'package:get_storage/get_storage.dart';
 
 class DetailHealthStudentView extends StatelessWidget {
   final _store = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,43 +28,47 @@ class DetailHealthStudentView extends StatelessWidget {
               Get.back();
             },
           ),
-          title: Row(
-            children: [
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white,
-                child: Image.asset("assets/images/user_2.png"),
-              ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          title: GetBuilder<HealthManagementController>(
+            init: Get.find(),
+            builder: (controller) {
+              return Row(
                 children: [
-                  Text('Nguyễn Duy Nhân'),
-                  SizedBox(height: 5),
-                  Text(
-                    '16T3',
-                    style: TextStyle(fontSize: 16),
-                  )
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.white,
+                    child: Image.asset("assets/images/user_2.png"),
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // SizedBox(width: 15),
+                      if (controller.studentDetail != null)
+                        Text(
+                            "${controller.studentDetail.firstName} ${controller.studentDetail.lastName}"),
+                    ],
+                  ),
                 ],
-              ),
-            ],
+              );
+            },
           )),
       body: BodyDetailHealthStudent(),
-      floatingActionButton: _store.read(AppStorageKey.studentId) == null  ? FloatingActionButton(
-        backgroundColor: kPrimaryColor,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 30,
-        ),
-        onPressed: () {
-          Get.dialog(
-            AddDetailHealth(),
-          );
-        },
-      ) : SizedBox(),
+      floatingActionButton: _store.read(AppStorageKey.studentId) == null
+          ? FloatingActionButton(
+              backgroundColor: kPrimaryColor,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Get.dialog(
+                  AddDetailHealth(),
+                );
+              },
+            )
+          : SizedBox(),
       bottomNavigationBar: NavigationView(),
     );
   }
 }
-

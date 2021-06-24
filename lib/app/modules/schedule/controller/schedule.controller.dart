@@ -9,9 +9,6 @@ class ScheduleController extends GetxController {
   ScheduleController({@required this.repository}) : assert (repository != null);
   final _store = GetStorage();
 
-  Rx<TextEditingController> firstDay = TextEditingController().obs;
-  Rx<TextEditingController> lastDay = TextEditingController().obs;
-  Rx<TextEditingController> content = TextEditingController().obs;
   RxBool isLoadding = false.obs;
   RxInt currentIndex = RxInt(0);
 
@@ -20,11 +17,11 @@ class ScheduleController extends GetxController {
     update();
   }
 
-  Future<void> onSave() async {
+  Future<void> onSave(data) async {
     LeaveDayParamModel leaveDayParam = LeaveDayParamModel(
-      firstDay: firstDay.value.text,
-      lastDay: lastDay.value.text,
-      content: content.value.text,
+      firstDay: data["firstDay"],
+      lastDay: data["lastDay"],
+      content: data["content"],
       studentID: _store.read(AppStorageKey.studentId),
     );
     try{

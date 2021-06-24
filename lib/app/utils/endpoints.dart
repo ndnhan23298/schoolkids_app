@@ -14,6 +14,8 @@ class Endpoint{
   static String FEE_CLASS =  "$API/fees";
   static String HEALTH =  "$API/health";
   static String STUDENT_BY_CLASS = "$API/students/class";
+  static String STUDENT_DETAIL = "$API/students";
   static String PARTICIPANT = "$API/participants";
   static String LEAVE_DAY = "$API/leave-day";
+  static String FIREBASE = "$API/firebase";
 }
