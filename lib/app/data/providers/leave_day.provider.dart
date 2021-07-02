@@ -17,4 +17,19 @@ class LeaveDayProvider extends GetConnect {
       return false;
     }
   }
+
+  Future<List<LeaveDayModel>> getLeaveDay(String classID) async {
+    try {
+      final response = await HttpHelper.get("${Endpoint.LEAVE_DAY}?classID=${classID}");
+      if (response != null) {
+        final listLeaveDay = response.body.map<LeaveDayModel>((_){
+          return LeaveDayModel.fromJson(_);
+        }).toList();
+        return listLeaveDay;
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
 }

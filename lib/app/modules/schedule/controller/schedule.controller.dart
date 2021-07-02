@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 class ScheduleController extends GetxController {
   final LeaveDayRepository repository;
   ScheduleController({@required this.repository}) : assert (repository != null);
+  RxList<LeaveDayModel> leaveDay = RxList<LeaveDayModel>([]);
   final _store = GetStorage();
 
   RxBool isLoadding = false.obs;
@@ -39,9 +40,27 @@ class ScheduleController extends GetxController {
     }
   }
 
+  Future<void> getLeaveDay() async {
+    isLoadding.value = true;
+    update();
+    leaveDay.clear();
+    try {
+      final classID = _store.read(AppStorageKey.classId);
+      await repository.getLeaveDay(classID).then((response) {
+        isLoadding.value = false;
+        update();
+        if (response != null) {
+          leaveDay.addAll(response);
+          update();
+        }
+      });
+    } catch (e) {}
+  }
+
   @override
   void onInit() async {
     super.onInit();
+    getLeaveDay();
   }
 
   @override

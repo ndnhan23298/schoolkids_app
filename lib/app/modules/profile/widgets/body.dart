@@ -1,4 +1,5 @@
 import 'package:doan/app/modules/auth/controllers/auth.controller.dart';
+import 'package:doan/app/modules/user_access/controllers/user_access.controller.dart';
 import 'package:doan/app/routes/app_pages.dart';
 import 'package:doan/app/utils/keys.dart';
 import 'package:flutter/material.dart';
@@ -41,93 +42,93 @@ class Body extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: kDefaultPadding, horizontal: kDefaultPadding * 2.5),
           child: Column(
             children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
-                width: Get.width,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3,
-                          color: kPrimaryColor),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: Get.height,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(child: Text("Hồ sơ của bé", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18
-                    ),))
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
-                width: Get.width,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3,
-                          color: kPrimaryColor),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: Get.height,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(child: Text("Thông tin tài khoản", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18
-                    ),))
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
-                width: Get.width,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3,
-                          color: kPrimaryColor),
-                    ]),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: Get.height,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(child: Text("Hướng dẫn sử dụng", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18
-                    ),))
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
+              //   padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
+              //   width: Get.width,
+              //   height: 60,
+              //   decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(10),
+              //       boxShadow: [
+              //         BoxShadow(
+              //             offset: Offset(0, 0),
+              //             blurRadius: 3,
+              //             color: kPrimaryColor),
+              //       ]),
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         width: 40,
+              //         height: Get.height,
+              //         color: Colors.blue,
+              //       ),
+              //       SizedBox(width: 15),
+              //       Expanded(child: Text("Hồ sơ của bé", style: TextStyle(
+              //           color: Colors.black,
+              //           fontSize: 18
+              //       ),))
+              //     ],
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
+              //   padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
+              //   width: Get.width,
+              //   height: 60,
+              //   decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(10),
+              //       boxShadow: [
+              //         BoxShadow(
+              //             offset: Offset(0, 0),
+              //             blurRadius: 3,
+              //             color: kPrimaryColor),
+              //       ]),
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         width: 40,
+              //         height: Get.height,
+              //         color: Colors.blue,
+              //       ),
+              //       SizedBox(width: 15),
+              //       Expanded(child: Text("Thông tin tài khoản", style: TextStyle(
+              //           color: Colors.black,
+              //           fontSize: 18
+              //       ),))
+              //     ],
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: kDefaultPadding * 1.5),
+              //   padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5, horizontal: kDefaultPadding),
+              //   width: Get.width,
+              //   height: 60,
+              //   decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(10),
+              //       boxShadow: [
+              //         BoxShadow(
+              //             offset: Offset(0, 0),
+              //             blurRadius: 3,
+              //             color: kPrimaryColor),
+              //       ]),
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         width: 40,
+              //         height: Get.height,
+              //         color: Colors.blue,
+              //       ),
+              //       SizedBox(width: 15),
+              //       Expanded(child: Text("Hướng dẫn sử dụng", style: TextStyle(
+              //           color: Colors.black,
+              //           fontSize: 18
+              //       ),))
+              //     ],
+              //   ),
+              // ),
               GestureDetector(
                 onTap:  () async {
                   Get.toNamed(Routes.USER_ACCESS);
@@ -293,13 +294,13 @@ class Body extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Mẹ bé Bờm",
+                    UserAccessController.to.userDisplay.toString(),
                     style: TextStyle(color: kPrimaryColor, fontSize: 18),
                   ),
-                  Text(
-                    "Tài khoản: mebebom",
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  )
+                  // Text(
+                  //   "Tài khoản: mebebom",
+                  //   style: TextStyle(color: Colors.black, fontSize: 16),
+                  // )
                 ],
               ),
             ),

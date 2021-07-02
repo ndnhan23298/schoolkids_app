@@ -92,7 +92,7 @@ class FeaturesView extends StatelessWidget {
                   ),
                 ),
               ),
-              _store.read(AppStorageKey.studentId) != null || _store.read(AppStorageKey.schoolId) != null ? GestureDetector(
+              GestureDetector(
                 onTap: (){
                   Get.toNamed(Routes.TUITION);
                 },
@@ -126,7 +126,7 @@ class FeaturesView extends StatelessWidget {
                     ],
                   ),
                 ),
-              ) : SizedBox(),
+              ),
               GestureDetector(
                 onTap: (){
                   Get.toNamed(Routes.LIST_USER);

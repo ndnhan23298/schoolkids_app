@@ -21,6 +21,8 @@ class UserAccessController extends GetxController {
   RxList<DataAccessModel> data = RxList<DataAccessModel>([]);
   RxBool isLoading = false.obs;
 
+  RxString userDisplay = RxString("");
+
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -74,7 +76,7 @@ class UserAccessController extends GetxController {
     });
     userAccess.students.forEach((_) {
       DataAccessModel dataAccess = new DataAccessModel(
-          id: _.id, name: _.firstName + _.lastName, classId: _.classID);
+          id: _.id, name: _.firstName + ' ' + _.lastName, classId: _.classID);
       data.add(dataAccess);
     });
     userAccess.schools.forEach((_) {
@@ -95,6 +97,8 @@ class UserAccessController extends GetxController {
     if  (dataAccess.schoolId != null) {
       _store.write(AppStorageKey.schoolId, dataAccess.schoolId);
     }
+    userDisplay.value = dataAccess.name;
+    update();
     NavigationController.currentIndex.value = 0;
     Get.toNamed(Routes.HOME);
   }

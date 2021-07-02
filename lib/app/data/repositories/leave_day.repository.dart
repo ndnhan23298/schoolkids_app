@@ -9,4 +9,9 @@ class LeaveDayRepository {
   Future<bool> createLeaveDay (LeaveDayParamModel leaveDayParam) async {
     return apiClient.createLeaveDay(leaveDayParam);
   }
+
+  Future<List<LeaveDayModel>> getLeaveDay( String classID) async {
+    return apiClient.getLeaveDay(classID);
+  }
+
 }

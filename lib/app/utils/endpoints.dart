@@ -1,6 +1,6 @@
 
 class Endpoint{
-  static String API = "http://192.168.1.104:3000";
+  static String API = "http://192.168.1.28:3000";
   static String LOGIN = "$API/users/login";
   static String USER = "$API/users";
   static String MESSAGE = "$API/messages/conversations";
